@@ -5,11 +5,12 @@ from app.ui import get_bet, print_welcome, print_cards, print_balance, ask_repla
 
 def main():
     balance = 500
-    print_welcome()
     
     while balance >= 10:
         print_balance(balance)
         max_bet = min(get_bet_cap(balance), balance)
+        print_welcome(max_bet)
+
         bet = get_bet(balance, max_bet)
         if bet is None:
             break

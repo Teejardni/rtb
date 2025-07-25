@@ -1,5 +1,5 @@
-from card import rank_values, shuffle_deck, create_deck
-from ui import print_cards, get_round_1_guess, get_round_2_guess, get_round_3_guess, get_round_4_guess
+from app.card import rank_values, shuffle_deck, create_deck
+from app.ui import print_blank_card, print_cards, get_round_1_guess, get_round_2_guess, get_round_3_guess, get_round_4_guess
 
 def get_bet_cap(balance):
     if balance <= 1000:
@@ -13,8 +13,9 @@ def get_bet_cap(balance):
 
 def play_round_1(bet, card):
     print("\n--- Round 1: Red or Black? ---")
-    print_cards([card])
+    print_blank_card()
     guess = get_round_1_guess()
+    print_cards([card])
     is_red = card['suit'] in ['♥', '♦']
     correct = (guess == 'r' and is_red) or (guess == 'b' and not is_red)
     if correct:
@@ -29,8 +30,9 @@ def play_round_2(winnings, prev_card, card):
     print("Previous card:")
     print_cards([prev_card])
     print("New card:")
-    print_cards([card])
+    print_blank_card()
     guess = get_round_2_guess()
+    print_cards([card])
     prev_value = rank_values[prev_card['rank']]
     curr_value = rank_values[card['rank']]
     correct = (guess == 'h' and curr_value > prev_value) or (guess == 'l' and curr_value < prev_value)
@@ -46,8 +48,9 @@ def play_round_3(winnings, card1, card2, card):
     print("Previous cards:")
     print_cards([card1, card2])
     print("New card:")
-    print_cards([card])
+    print_blank_card()
     guess = get_round_3_guess()
+    print_cards([card])
     val1, val2 = rank_values[card1['rank']], rank_values[card2['rank']]
     curr_value = rank_values[card['rank']]
     min_val, max_val = min(val1, val2), max(val1, val2)
@@ -61,8 +64,9 @@ def play_round_3(winnings, card1, card2, card):
 
 def play_round_4(winnings, card):
     print("\n--- Round 4: Guess the Suit ---")
-    print_cards([card])
+    print_blank_card()
     guess = get_round_4_guess()
+    print_cards([card])
     suit_map = {'h': '♥', 'd': '♦', 'c': '♣', 's': '♠'}
     correct = suit_map[guess] == card['suit']
     if correct:
