@@ -1,4 +1,4 @@
-from card import suits, ranks
+from app.card import suits, ranks
 
 def display_card(card):
     rank, suit = card['rank'], card['suit']
@@ -11,6 +11,19 @@ def display_card(card):
         f"│      {rank:>2} │",
         "└─────────┘"
     ]
+def print_blank_card():
+    blank_card = [
+        "┌─────────┐",
+        "│         │",
+        "│         │",
+        "│  █████  │",
+        "│         │",
+        "│         │",
+        "└─────────┘"
+    ]
+    for line in blank_card:
+        print(line)
+
 
 def print_cards(cards):
     if not cards:
@@ -19,10 +32,10 @@ def print_cards(cards):
     for i in range(7):
         print('  '.join(lines[i] for lines in card_lines))
 
-def print_welcome():
+def print_welcome(max_bet):
     print("Welcome to Ride the Bus!")
-    print("Rules: Bet $10–max cap. Guess correctly to multiply your bet: 2x (Red/Black), 3x (Higher/Lower), 4x (In/Out), 20x (Suit).")
-    print("One wrong guess loses your bet. Max bet depends on balance: ≤$1,000: $100, ≤$5,000: $500, ≤$10,000: $750, >$10,000: $1,000.")
+    print(f"Rules: Bet $10–${max_bet}. Guess correctly to multiply your bet: 2x (Red/Black), 3x (Higher/Lower), 4x (In/Out), 20x (Suit).")
+    print("One wrong guess loses your bet.")
 
 def get_bet(balance, max_bet):
     if max_bet < 10:
